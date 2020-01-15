@@ -51,19 +51,7 @@ function sendDeviceUpdates(socket, dur) {
 //Reset devices locations to initial, clear old interval and create new interval
 function resetDevices(socket, dur) {
   //reset device locations to intitial
-  clearInterval(int);
   devices = JSON.parse(JSON.stringify(devices_start));
-  int = setInterval(() => {
-    devices.forEach(item => {
-      let rand = Math.random();
-      let add = rand < 0.5 ? rand * 0.004 * -1 : rand * 0.005;
-      //Math.random() < 0.5 ? -1 : 1;
-      item.lat = item.lat + add;
-      item.long = item.long + add;
-    });
-    socket.emit("deviceUpdates", devices);
-    populateNotifications(socket);
-  }, dur);
 }
 
 //Populate two kinds of  notifications: 1. proximity, 2. Area entered
